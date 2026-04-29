@@ -7,7 +7,7 @@ import { apiLogin } from '@/lib/api'
 
 export default function LoginPage() {
   const router = useRouter()
-  const [email, setEmail] = useState('admin@guardianflow.ai')
+  const [email, setEmail] = useState('admin_demo_guardianflow')
   const [password, setPassword] = useState('')
   const [showPw, setShowPw] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -22,7 +22,7 @@ export default function LoginPage() {
       localStorage.setItem('gf_token', res.access_token)
       router.push('/dashboard')
     } catch {
-      setError('Email atau password salah. Coba lagi.')
+      setError('Username atau password salah. Coba lagi.')
     } finally {
       setLoading(false)
     }
@@ -41,10 +41,10 @@ export default function LoginPage() {
 
         <form onSubmit={handleLogin} className="glass-card p-6 space-y-4">
           <div>
-            <label htmlFor="input-email" className="mb-1.5 block text-xs font-medium text-muted-foreground">Email</label>
+            <label htmlFor="input-username" className="mb-1.5 block text-xs font-medium text-muted-foreground">Username</label>
             <input
-              id="input-email"
-              type="email"
+              id="input-username"
+              type="text"
               value={email}
               onChange={e => setEmail(e.target.value)}
               className="w-full rounded-lg border border-border bg-secondary/50 px-3 py-2.5 text-sm focus:border-guardian-500 focus:outline-none focus:ring-1 focus:ring-guardian-500/50"

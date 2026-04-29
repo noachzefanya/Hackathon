@@ -91,13 +91,13 @@ class TransactionListResponse(BaseModel):
 # ── User schemas ──────────────────────────────────────────────────────────────
 
 class UserCreate(BaseModel):
-    email: EmailStr
+    email: str
     password: str = Field(..., min_length=8)
     role: str = "analyst"
 
 
 class UserLogin(BaseModel):
-    email: EmailStr
+    email: str
     password: str
 
 
