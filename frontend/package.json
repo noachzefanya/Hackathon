@@ -23,7 +23,6 @@
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "guardianflow-ai-root": "file:..",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
     "react": "^18.3.1",

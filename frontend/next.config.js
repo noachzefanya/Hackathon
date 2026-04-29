@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone',  // Required for Azure Static Web Apps container
+  // output: 'standalone', // Only needed for Docker/Azure — removed for Vercel deployment
 
   async headers() {
     return [
