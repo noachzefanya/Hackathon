@@ -1,0 +1,12 @@
+{
+  "name": "guardianflow-ai-root",
+  "version": "1.0.0",
+  "description": "Root workspace for GuardianFlow AI",
+  "scripts": {
+    "dev:frontend": "npm run dev --prefix frontend",
+    "build:frontend": "npm run build --prefix frontend",
+    "start:frontend": "npm run start --prefix frontend",
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend"
+  }
+}

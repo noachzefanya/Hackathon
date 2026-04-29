@@ -1,0 +1,48 @@
+name: Deploy Backend to Azure Container Apps
+
+on:
+  push:
+    branches: [main]
+    paths: [backend/**]
+
+env:
+  ACR_NAME: guardianflowacr
+  CONTAINER_APP_NAME: guardianflow-api
+  RESOURCE_GROUP: guardianflow-rg
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to ACR
+        run: az acr login --name ${{ env.ACR_NAME }}
+
+      - name: Build and Push Docker image
+        run: |
+          docker build \
+            -t ${{ env.ACR_NAME }}.azurecr.io/backend:${{ github.sha }} \
+            -t ${{ env.ACR_NAME }}.azurecr.io/backend:latest \
+            ./backend
+          docker push ${{ env.ACR_NAME }}.azurecr.io/backend:${{ github.sha }}
+          docker push ${{ env.ACR_NAME }}.azurecr.io/backend:latest
+
+      - name: Update Container App
+        run: |
+          az containerapp update \
+            --name ${{ env.CONTAINER_APP_NAME }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --image ${{ env.ACR_NAME }}.azurecr.io/backend:${{ github.sha }}
+
+      - name: Run DB Migrations
+        run: |
+          az containerapp exec \
+            --name ${{ env.CONTAINER_APP_NAME }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --command "alembic upgrade head" || true

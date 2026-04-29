@@ -1,0 +1,38 @@
+# GuardianFlow AI — Local Dev Requirements (no Azure, no PostgreSQL)
+# Jalankan: python -m pip install -r requirements-dev.txt
+
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9
+
+# SQLite (local dev) — ganti asyncpg/psycopg2
+aiosqlite==0.20.0
+sqlalchemy[asyncio]==2.0.30
+alembic==1.13.1
+
+# Auth
+python-jose[cryptography]==3.3.0
+bcrypt==4.1.3
+passlib[bcrypt]==1.7.4
+
+# ML — Python 3.13 compatible versions
+scikit-learn>=1.5.0
+xgboost>=2.1.0
+shap>=0.46.0
+numpy>=2.0.0
+pandas>=2.2.2
+joblib>=1.4.2
+
+# HTTP
+httpx==0.27.0
+
+# Validation — pydantic 2.11+ has binary wheels for Python 3.13
+pydantic>=2.11.0
+pydantic-settings>=2.7.0
+email-validator>=2.1.1
+
+# Utilities
+python-dotenv==1.0.1
+
+# Redis (optional — graceful fallback if not installed)
+redis==5.0.4
