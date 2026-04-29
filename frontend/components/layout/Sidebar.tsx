@@ -28,7 +28,8 @@ export function Sidebar() {
   useEffect(() => {
     const checkApi = async () => {
       try {
-        const res = await fetch('http://localhost:8000/health')
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+        const res = await fetch(`${apiUrl}/health`)
         setApiConnected(res.ok)
       } catch (e) {
         setApiConnected(false)
