@@ -70,7 +70,7 @@ export default function HomePage() {
               Buka Dashboard <ChevronRight className="h-5 w-5" />
             </Link>
             <a
-              href="http://localhost:8000/docs"
+              href={`${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'}/docs`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary px-8 py-3 text-base"
