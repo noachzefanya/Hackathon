@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import {
   Shield, Activity, ListFilter, GitBranch,
   BarChart3, Monitor, Bell, Settings, LogOut,
-  ChevronRight, Wifi, WifiOff,
+  ChevronRight, Wifi, WifiOff, X
 } from 'lucide-react'
 import { useDashboardStore } from '@/lib/store'
 import { cn } from '@/lib/utils'
@@ -22,7 +22,7 @@ const NAV = [
 
 export function Sidebar() {
   const pathname = usePathname()
-  const { wsConnected, stats } = useDashboardStore()
+  const { wsConnected, stats, sidebarOpen, setSidebarOpen } = useDashboardStore()
   const [apiConnected, setApiConnected] = useState(false)
 
   useEffect(() => {
@@ -40,17 +40,41 @@ export function Sidebar() {
     return () => clearInterval(interval)
   }, [])
 
+  // Close sidebar on route change
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [pathname, setSidebarOpen])
+
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-border/50 bg-card/80 backdrop-blur-xl">
+    <>
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      
+      <aside className={cn(
+        "fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-border/50 bg-card/80 backdrop-blur-xl transition-transform duration-300 ease-in-out lg:translate-x-0",
+        sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      )}>
       {/* Logo */}
       <div className="flex items-center gap-3 border-b border-border/50 px-5 py-4">
         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-guardian-600 shadow-lg shadow-guardian-600/30">
           <Shield className="h-5 w-5 text-white" />
         </div>
-        <div>
+        <div className="flex-1">
           <div className="text-sm font-bold leading-none">GuardianFlow</div>
           <div className="mt-0.5 text-xs text-muted-foreground font-mono">AI v1.0</div>
         </div>
+        {/* Mobile close button */}
+        <button 
+          className="rounded-lg p-1 text-muted-foreground hover:bg-secondary lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        >
+          <X className="h-5 w-5" />
+        </button>
       </div>
 
       {/* Connection status */}
@@ -149,5 +173,6 @@ export function Sidebar() {
         </Link>
       </div>
     </aside>
+    </>
   )
 }

@@ -17,6 +17,10 @@ export interface LiveTransaction {
 }
 
 interface DashboardState {
+  // Mobile sidebar
+  sidebarOpen: boolean;
+  setSidebarOpen: (v: boolean) => void;
+
   // Live feed
   transactions: LiveTransaction[];
   addTransaction: (tx: LiveTransaction) => void;
@@ -42,10 +46,13 @@ interface DashboardState {
 }
 
 export const useDashboardStore = create<DashboardState>((set, get) => ({
+  sidebarOpen: false,
   transactions: [],
   wsConnected: false,
   selectedTx: null,
   stats: { total: 0, blocked: 0, flagged: 0, approved: 0, avgScore: 0 },
+
+  setSidebarOpen: (v) => set({ sidebarOpen: v }),
 
   addTransaction: (tx) =>
     set((state) => ({
