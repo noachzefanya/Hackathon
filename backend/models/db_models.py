@@ -15,7 +15,7 @@ from backend.core.database import Base, _is_sqlite
 
 
 def now_utc():
-    return datetime.now(timezone.utc)
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
 # ── Enums (stored as strings for cross-DB compat) ─────────────────────────────

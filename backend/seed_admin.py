@@ -36,7 +36,7 @@ async def main():
                 hashed_password=hash_password(password),
                 role=UserRole.admin,
                 is_active=True,
-                created_at=datetime.now(timezone.utc)
+                created_at=datetime.now(timezone.utc).replace(tzinfo=None)
             )
             db.add(new_user)
             await db.commit()
