@@ -66,7 +66,7 @@ const ALERT_RULES = [
 export default function MonitorPage() {
   return (
     <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold">Azure Monitor Dashboard</h1>
           <p className="text-sm text-muted-foreground">Application Insights + Log Analytics Workspace</p>
@@ -89,7 +89,7 @@ export default function MonitorPage() {
               <p className="font-semibold text-foreground">Azure Monitor Workbook</p>
               <p className="text-sm mt-1">Set <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">NEXT_PUBLIC_MONITOR_WORKBOOK_URL</code> untuk embed workbook</p>
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-4 w-full max-w-lg px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 w-full max-w-lg px-4 sm:px-8">
               {[
                 { icon: Activity,      label: 'Fraud Rate Chart',         desc: 'Real-time fraud event trends' },
                 { icon: Zap,           label: 'Scoring Latency p50/95/99', desc: 'Model inference performance' },

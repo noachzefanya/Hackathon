@@ -71,18 +71,18 @@ export default function DashboardPage() {
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
         <div>
           <h1 className="text-3xl font-extrabold text-gradient">Live Transaction Feed</h1>
           <p className="text-sm text-muted-foreground mt-0.5">Real-time scoring via WebSocket — {transactions.length} transaksi sesi ini</p>
         </div>
-        <div className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium shadow-lg transition-all ${wsConnected ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 glow-green' : 'border-border bg-secondary text-muted-foreground'}`}>
+        <div className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium shadow-lg transition-all self-start md:self-auto ${wsConnected ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-400 glow-green' : 'border-border bg-secondary text-muted-foreground'}`}>
           {wsConnected ? <><span className="pulse-dot scale-75" /> Live Scoring Active</> : <><span className="h-2 w-2 rounded-full bg-muted-foreground" /> Offline</>}
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <StatCard icon={Zap} label="Total Transaksi" value={stats.total} sub="sesi ini" color="text-guardian-400" />
         <StatCard icon={ShieldCheck} label="Disetujui" value={stats.approved} sub="risiko rendah" color="text-emerald-400" />
         <StatCard icon={AlertTriangle} label="Step-Up MFA" value={stats.flagged} sub="risiko sedang" color="text-amber-400" />

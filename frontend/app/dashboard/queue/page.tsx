@@ -24,7 +24,7 @@ export default function QueuePage() {
 
   return (
     <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold">Antrian Review Manual</h1>
           <p className="text-sm text-muted-foreground mt-0.5">Transaksi dengan skor risiko &gt; 70</p>
@@ -39,7 +39,7 @@ export default function QueuePage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           { label: 'Total Pending', value: total, color: 'text-amber-400', bg: 'bg-amber-500/10', icon: Clock },
           { label: 'Critical (>85)', value: items.filter(t => t.risk_score > 85).length, color: 'text-red-400', bg: 'bg-red-500/10', icon: AlertTriangle },
