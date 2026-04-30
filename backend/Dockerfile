@@ -25,8 +25,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends libpq5 curl && 
 COPY --from=builder /root/.local /root/.local
 ENV PATH=/root/.local/bin:$PATH
 
-# Copy application code
-COPY . .
+# Copy application code into a 'backend' folder so absolute imports work
+COPY . /app/backend
+ENV PYTHONPATH=/app
 
 # Create non-root user
 RUN useradd -r -u 1001 guardianflow && \
